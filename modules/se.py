@@ -1,3 +1,4 @@
+# squeeze-and-excitation layer
 import torch.nn as nn
 
 __all__ = ['SE3d']

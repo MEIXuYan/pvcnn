@@ -24,9 +24,11 @@ class PVConv(nn.Module):
             nn.Conv3d(out_channels, out_channels, kernel_size, stride=1, padding=kernel_size // 2),
             nn.BatchNorm3d(out_channels, eps=1e-4),
             nn.LeakyReLU(0.1, True),
-         ]
+        ]
+        
         if with_se:
             voxel_layers.append(SE3d(out_channels))
+
         self.voxel_layers = nn.Sequential(*voxel_layers)
         self.point_features = SharedMLP(in_channels, out_channels)
 
