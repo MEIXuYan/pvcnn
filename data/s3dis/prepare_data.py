@@ -78,7 +78,7 @@ def prepare_label(data_dir, output_dir):
 
 
 def main():
-    default_data_dir = 'data/s3dis/Stanford3dDataset_v1.2_Aligned_Version'
+    default_data_dir = '/media/xuyan/dataset_disk/s3dis/Stanford3dDataset_v1.2_Aligned_Version'
     default_output_dir = 'data/s3dis/pointcnn'
     parser = argparse.ArgumentParser()
     parser.add_argument('-d', '--data', dest='data_dir', default=default_data_dir,

@@ -13,8 +13,7 @@ class AvgVoxelization(Function):
         :param features: Features of the point cloud, FloatTensor[B, C, N]
         :param coords: Voxelized Coordinates of each point, IntTensor[B, 3, N]
         :param resolution: Voxel resolution
-        :return:
-            Voxelized Features, FloatTensor[B, C, R, R, R]
+        :return Voxelized Features, FloatTensor[B, C, R, R, R]
         """
         features = features.contiguous()
         coords = coords.int().contiguous()
@@ -28,13 +27,12 @@ class AvgVoxelization(Function):
         """
         :param ctx:
         :param grad_output: gradient of output, FloatTensor[B, C, R, R, R]
-        :return:
-            gradient of inputs, FloatTensor[B, C, N]
+        :return gradient of inputs, FloatTensor[B, C, N]
         """
         b, c = grad_output.shape[:2]
         indices, counts = ctx.saved_tensors
         grad_features = _backend.avg_voxelize_backward(grad_output.contiguous().view(b, c, -1), indices, counts)
         return grad_features, None, None
 
-
+# 
 avg_voxelize = AvgVoxelization.apply
